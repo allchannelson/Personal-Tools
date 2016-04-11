@@ -1,0 +1,51 @@
+*** Inject images to eClass e-mail ***
+create a link with the id "image" first, then, using developer console:
+
+document.getElementById("Message___Frame").contentDocument.getElementsByTagName("iframe")[0].contentDocument.getElementById("image").innerHTML="<img src='http://www.cdgfss.edu.hk/temp/29022016.png' />";
+
+*** http://www.cyberciti.biz/faq/howto-copy-mbr/ ***
+
+- dd command for two discs with different size partitions
+dd if=/tmp/mbrsda.bak of=/dev/sdb bs=446 count=1
+
+- dd command to copy MBR (identically sized partitions only)
+dd if=/dev/sda of=/dev/sdb bs=512 count=1
+
+http://superuser.com/questions/145516/cloning-single-disk-drive-to-multiple-drives-simultaneously
+sudo apt-get update
+sudo apt-get install pv
+
+cat drive.image | tee >(dd of=/dev/sda) >(dd of=/dev/sdb) >(dd of=/dev/sdc) >(dd of=/dev/sdd) | /dev/null
+pv /dev/sda | tee >(dd of=/dev/sdb) >(dd of=/dev/sdc) >(dd of=/dev/sdd) >(dd of=/dev/sde) >(dd of=/dev/sdf) | dd of=/dev/sdg
+
+pv /dev/sda | tee >(dd of=/dev/sdb) >(dd of=/dev/sdc) >(dd of=/dev/sdd) >(dd of=/dev/sde) | dd of=/dev/sdf\
+
+dd bs=512 count=1 if=/dev/sdf of=/dev/sda
+dd bs=512 count=1 if=/dev/sdf of=/dev/sdb
+dd bs=512 count=1 if=/dev/sdf of=/dev/sdc
+dd bs=512 count=1 if=/dev/sdf of=/dev/sdd
+dd bs=512 count=1 if=/dev/sdf of=/dev/sde
+
+pv /dev/sdf1 | tee >(dd bs=64k of=/dev/sdb1) >(dd bs=64k of=/dev/sdc1) >(dd bs=64k of=/dev/sdd1) | dd bs=64k of=/dev/sde1
+pv /dev/sdf2 | tee >(dd bs=64k of=/dev/sdb2) >(dd bs=64k of=/dev/sdc2) >(dd bs=64k of=/dev/sdd2) | dd bs=64k of=/dev/sde2
+
+*** mencoder rotate video ***
+
+man mplayer
+/rotate
+
+rotate[=<0-7>]
+  Rotates  the  image  by 90 degrees and optionally flips it.  For
+  values between 4-7 rotation is only done if the  movie  geometry
+  is portrait and not landscape.
+
+     0    Rotate by 90 degrees clockwise and flip (default).
+
+     1    Rotate by 90 degrees clockwise.
+
+     2    Rotate by 90 degrees counterclockwise.
+
+     3    Rotate by 90 degrees counterclockwise and flip.
+
+;rotate=1 clockwise, rotate=2 counter-clockwise
+mencoder -vf rotate=1 -oac copy -ovc copy -o output.avi input.avi 
