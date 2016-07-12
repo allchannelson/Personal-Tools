@@ -835,7 +835,7 @@ if (RegExMatch(Clipboard, "https?://.*") >= 1) {
   ToolTip, Non-URL data received: %Clipboard%
   Sleep 1000
   ToolTip
-  return  
+  return
 }
 return
 
@@ -1127,6 +1127,41 @@ return
 SendInput, {Click 3}7:30pm{tab}10:00pm
 return
 
+#IfWinActive Idle Tree
+a::
+s::
+d::
+f::
+`::
+  Click
+return
+
+#IfWinActive DARK SOULS II
+F5::
+TrayTip, , Saved, 1
+FileCopy, C:\Users\15ys\Dropbox\G\Dark Souls 2\DARKSII0000.sl2, C:\Users\15ys\AppData\Roaming\DarkSoulsII\Backup, 1
+return
+
+F9::
+TrayTip, , Restored, 1
+FileCopy, C:\Users\15ys\AppData\Roaming\DarkSoulsII\Backup\DARKSII0000.sl2, C:\Users\15ys\Dropbox\G\Dark Souls 2, 1
+return
+
+x::
+SendInput, {w up}{space up}
+sleep 100
+SendInput, {w down}{z down}
+sleep 50
+SendInput, {z up}{w up}
+
+f::
+SendInput, {w up}{space up}
+sleep 100
+SendInput, {w down}{c down}
+sleep 50
+SendInput, {c up}{w up}
+
+
 #IfWinActive
 
 ^NumpadMult::
@@ -1195,3 +1230,4 @@ return
 ^`::
 WinMinimize, A
 return
+
